@@ -14,3 +14,9 @@ publications:
 comment:
     path: /comment/{id}
     controller: App\Controller\PostController::addComment
+
+
+api_controller:
+    path: /api/users
+    controller: App\Controller\ApiController::getUsers
+    methods: [GET,POST,DELETE,UPDATE]

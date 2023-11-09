@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\Avispost;
+use App\Entity\Commentaire;
 use App\Form\ModificationPostType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,7 +91,12 @@ public function supprimerPost(Request $request, $id): Response
         foreach ($avisPosts as $avis) {
             $entityManager->remove($avis);
         }
+        $commentaires = $entityManager->getRepository(Commentaire::class)->findBy(['idPost' => $post]);
 
+        foreach ($commentaires as $commentaire) {
+            $entityManager->remove($commentaire);
+        }
+    
         // Supprimez la publication
         $entityManager->remove($post);
         $entityManager->flush();

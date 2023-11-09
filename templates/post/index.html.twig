@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+	<link href="{{ asset('./assets/css/home.css') }}" rel="stylesheet"/>
+{% endblock %}
 {% block body %}
 	{% for message in app.flashes('error') %}
 		<div class="alert alert-danger">
@@ -7,160 +9,273 @@
 		</div>
 	{% endfor %}
 	{% block content %}
-		<div class="container-fluid d-flex justify-content-center mt-5">
-
-			<div id="map" style="width: 600px; height: 400px;"></div>
-
-
-		</div>
-		<div class="container">
-			<h1 class="mt-4 mb-5">les pannes déclarés par les utilisateurs</h1>
-
-			{% for message in app.flashes('error') %}
-				<div class="alert alert-danger mt-4">
-					{{ message }}
-				</div>
-			{% endfor %}
+		<div class="container-fluid">
 
 			<div class="row">
-				{% for post in posts %}
-					<div class="col-md-4">
-						<div class="card mb-4">
-							<div class="card-body">
-								<h5 class="card-title">Publié par :
-									{{ post.idUtlisateur.prenomUtilisateur }}</h5>
-								<h6>Message :</h6>
-								<p class="card-text">{{ post.contenuPost }}</p>
-								<p class="card-text">Station:
-									{{ post.idStation.nomStation }}
-									- Ligne
-									{{ post.idStation.ligne }}</p>
-								<p class="card-text">Catégorie:
-									{{ post.idCategorie.libCategorie }}</p>
-								<a href="{{ path('post_confirm', {'id': post.idPost}) }}">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-grin-fill text-success" viewbox="0 0 16 16">
-										<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM6.488 7c-.23-.598-.661-1-1.155-1-.493 0-.924.402-1.155 1A2.794 2.794 0 0 1 4 6c0-1.105.597-2 1.333-2 .737 0 1.334.895 1.334 2 0 .364-.065.706-.179 1Zm5.334 0c-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6c0 .364-.065.706-.178 1ZM2.696 8.756a.48.48 0 0 1 .382-.118C4.348 8.786 6.448 9 8 9c1.553 0 3.653-.214 4.922-.362a.48.48 0 0 1 .383.118.3.3 0 0 1 .096.29c-.09.47-.242.921-.445 1.342-.263.035-.576.075-.929.115A36.798 36.798 0 0 1 8 10.75c-1.475 0-2.934-.123-4.027-.247-.353-.04-.666-.08-.93-.115A5.457 5.457 0 0 1 2.6 9.045a.3.3 0 0 1 .097-.29ZM8 13.5a5.49 5.49 0 0 1-4.256-2.017l.116.014c1.115.126 2.615.253 4.14.253 1.525 0 3.025-.127 4.14-.253l.117-.014A5.49 5.49 0 0 1 8 13.5Z"/>
-									</svg>
-								</svg>
-								{{ post.postConfirmer }}</a>
-							<a href="{{ path('post_infirm', {'id': post.idPost}) }}">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown-fill text-danger" viewbox="0 0 16 16">
-									<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-								</svg>
-							</svg>
-							{{ post.postInfirmer }}</a>
-					</div>
-					<!-- Bouton pour ouvrir le modal de création de commentaires -->
-					<div class="d-flex justify-content-center">
-						<button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
-							Ajouter un commentaire
-						</button>
+				<nav id="mainNavbar" class="col-lg-2 sidebar" style="background-color: #47657c; color:white;">
 
-					</div>
-					<h3>Commentaires :</h3>
-					<ul>
-						{% for comment in commentsByPost[post.idPost] %}
-							<li>
-								<strong>Commenté par :
-									{{ comment.idUtlisateur.prenomUtilisateur }}</strong>
-								{{ comment.contenuCommentaire }}
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
+					<div
+						class="container-fluid">
+
+						<!-- Brand -->
+						<a class="navbar-brand" href="./index.html">
+							<img src="./assets/images/logoMobility.png" alt="" srcset="" height="50%" width="50%">
+						</a>
+
+						<!-- Navbar toggler -->
+						<div>
+							<a href="javascript: void(0);" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon text-light">
+									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewbox="0 0 16 16">
+										<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+									</svg>
+								</span>
+							</a>
+						</div>
+						<!-- Collapse -->
+						<div
+							class="collapse navbar-collapse" id="sidenavCollapse">
+
+							<!-- Navigation -->
+							<ul class="navbar-nav mb-lg-7 mt-1">
+								<li class="nav-item dropdown">
+									<a class="nav-link active" href="{{path('publications')}}" role="button" >
+										<svg viewbox="0 0 24 24" class="nav-link-icon" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+											<path d="M3.753,13.944v8.25h6v-6a1.5,1.5,0,0,1,1.5-1.5h1.5a1.5,1.5,0,0,1,1.5,1.5v6h6v-8.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+											<path d="M.753,12.444,10.942,2.255a1.5,1.5,0,0,1,2.122,0L23.253,12.444" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+										</svg>
+										<span>Home</span>
+									</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link " href="#authenticationCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="authenticationCollapse">
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="nav-link-icon" height="18" width="18">
+											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.75 9.75H5.25C4.42157 9.75 3.75 10.4216 3.75 11.25V21.75C3.75 22.5784 4.42157 23.25 5.25 23.25H18.75C19.5784 23.25 20.25 22.5784 20.25 21.75V11.25C20.25 10.4216 19.5784 9.75 18.75 9.75Z"></path>
+											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 9.75V6C6.75 4.60761 7.30312 3.27226 8.28769 2.28769C9.27226 1.30312 10.6076 0.75 12 0.75C13.3924 0.75 14.7277 1.30312 15.7123 2.28769C16.6969 3.27226 17.25 4.60761 17.25 6V9.75"></path>
+											<path stroke="currentColor" stroke-width="1.5" d="M12 16.5C11.7929 16.5 11.625 16.3321 11.625 16.125C11.625 15.9179 11.7929 15.75 12 15.75"></path>
+											<path stroke="currentColor" stroke-width="1.5" d="M12 16.5C12.2071 16.5 12.375 16.3321 12.375 16.125C12.375 15.9179 12.2071 15.75 12 15.75"></path>
+										</svg>
+										<span>Mon Compte</span>
+									</a>
+									<div class="collapse " id="authenticationCollapse">
+										<ul class="nav flex-column">
+											<li class="nav-item dropdown">
+												<a class="nav-link text-light" href="{{path('app_connexion')}}"  role="button">
+													<span>Connexion</span>
+												</a>
+											</li>
+																						<li class="nav-item dropdown">
+												<a class="nav-link text-light" href="{{path('dashboard_utilisateur')}}"  role="button">
+													<span>Mon espace</span>
+												</a>
+											</li>
+											<li class="nav-item dropdown">
+												<a class="nav-link text-light" href="{{path('app_inscription_utilisateur')}}" role="button">
+													<span>Inscription</span>
+												</a>
+											</li>
+											<li class="nav-item dropdown">
+												<a class="nav-link text-light" href="{{ path('app_connexion') }}"  role="button">
+													<span>Déconnexion</span>
+												</a>
+											</li>
+											<li class="nav-item dropdown">
+												<a class="nav-link text-light" href="{{ path('app_cree_post') }}"  role="button">
+													<span>Créer Post</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="nav-item w-100">
+									<hr>
+								</li>
+								<li class="nav-item">
+									<a href="./docs/index.html" class="nav-link">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download text-light" viewbox="0 0 16 16">
+											<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+											<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+										</svg>
+										<span>Notre Application</span>
+									</a>
+								</li>
+							</ul>
+							<!-- End of Navigation -->
+						</div>
+					</nav>
+					<main class="col-lg-10">
+
+						<div class="container-fluid d-flex  mt-5">
+
+							<div id="map" style="width: 600px; height: 400px;" class="mb-3"></div>
+
+							<!-- Modal de création de commentaires (en dehors de la boucle) -->
+							<div class="modal fade" id="createCommentModal" tabindex="-1" role="dialog" aria-labelledby="createCommentModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="createCommentModalLabel">Ajouter un commentaire</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form method="POST" action="{{ path('comment', {'id': '__postId__'}) }}">
+												{{ form_start(commentForm) }}
+												{{ form_row(commentForm.contenuCommentaire) }}
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+												<button type="submit" class="btn btn-primary">Ajouter le commentaire</button>
+												{{ form_end(commentForm) }}
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div
+								class="col">
+								<!-- Card -->
+								<div class="card border-0 flex-fill w-100" style="background-color:#cddde8;" data-list="{&quot;valueNames&quot;: [&quot;name&quot;, &quot;email&quot;, &quot;id&quot;, {&quot;name&quot;: &quot;date&quot;, &quot;attr&quot;: &quot;data-signed&quot;}, &quot;status&quot;], &quot;page&quot;: 8}" id="users">
+									<div
+										class="card-header border-0 card-header-space-between">
+
+										<!-- Title -->
+										<h5 class="card-header-title  text-uppercase text-center text-light">
+											Problème(s) signalé(s) :
+										</h5>
+										<!-- Table -->
+									<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    <a  class="text-muted list-sort" data-sort="name">
+                        Publié par :
+                    </a>
+                </th>
+                <th>
+                    <a  class="text-muted list-sort" data-sort="email">
+                        Message :
+                    </a>
+                </th>
+                <th>
+                    <a  class="text-muted list-sort" data-sort="id">
+                        Station :
+                    </a>
+                </th>
+                <th>
+                    <a  class="text-muted list-sort" data-sort="date">
+                        Catégorie :
+                    </a>
+                </th>
+                <th class="w-150px min-w-150px">
+                    <a  class="text-muted list-sort" data-sort="status">
+                        Avis :
+                    </a>
+                </th>
+                <th class="w-150px min-w-150px">
+                    <a  class="text-muted list-sort" data-sort="status">
+                        voir/ajouter commentaire :
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            {% for post in posts %}
+                <tr>
+                    <td>
+                        <span class="name fw-bold">{{ post.idUtlisateur.prenomUtilisateur }}</span>
+                    </td>
+                    <td class="email">{{ post.contenuPost }}</td>
+                    <td class="id metro-station">
+                        {{ post.idStation.nomStation }} - Ligne {{ post.idStation.ligne }}
+                    </td>
+                    <td class="date">
+                        {% if post.idCategorie.libCategorie == 'ascenseur' %}
+                            <img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" width="10%">
+                        {% elseif post.idCategorie.libCategorie == 'escalator' %}
+                            <img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" width="10%">
+                        {% elseif post.idCategorie.libCategorie == 'Forte affluence' %}
+                            <img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" width="10%">
+                        {% elseif post.idCategorie.libCategorie == 'Travaux' %}
+                            <img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" width="10%">
+                        {% endif %}
+                        {{ post.idCategorie.libCategorie }}
+						
+                    </td>
+                    <td class="status">
+					<div>
+                         <a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-grin-fill" viewbox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM6.488 7c-.23-.598-.661-1-1.155-1-.493 0-.924.402-1.155 1A2.794 2.794 0 0 1 4 6c0-1.105.597-2 1.333-2 .737 0 1.334.895 1.334 2 0 .364-.065.706-.179 1Zm5.334 0c-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6c0 .364-.065.706-.178 1ZM2.696 8.756a.48.48 0 0 1 .382-.118C4.348 8.786 6.448 9 8 9c1.553 0 3.653-.214 4.922-.362a.48.48 0 0 1 .383.118.3.3 0 0 1 .096.29c-.09.47-.242.921-.445 1.342-.263.035-.576.075-.929.115A36.798 36.798 0 0 1 8 10.75c-1.475 0-2.934-.123-4.027-.247-.353-.04-.666-.08-.93-.115A5.457 5.457 0 0 1 2.6 9.045a.3.3 0 0 1 .097-.29ZM8 13.5a5.49 5.49 0 0 1-4.256-2.017l.116.014c1.115.126 2.615.253 4.14.253 1.525 0 3.025-.127 4.14-.253l.117-.014A5.49 5.49 0 0 1 8 13.5Z"/>
+        </svg>
+        {{ post.postConfirmer }}
+    </a></div>
+						    <a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown-fill" viewbox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+        </svg>
+        {{ post.postInfirmer }}
+    </a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
+                            Ajouter commentaire
+                        </button>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#commentsCollapse{{ post.idPost }}">
+                            Voir commentaires
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <div id="commentsCollapse{{ post.idPost }}" class="collapse">
+                            <h6>Commentaires :</h6>
+                            <ul>
+                                {% for comment in commentsByPost[post.idPost] %}
+                                    <li>
+                                        <strong>Commenté par : {{ comment.idUtlisateur.prenomUtilisateur }}</strong>
+                                        {{ comment.contenuCommentaire }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-<!-- Modal de création de commentaires (en dehors de la boucle) -->
-<div class="modal fade" id="createCommentModal" tabindex="-1" role="dialog" aria-labelledby="createCommentModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="createCommentModalLabel">Ajouter un commentaire</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form method="POST" action="{{ path('comment', {'id': '__postId__'}) }}">
-					{{ form_start(commentForm) }}
-					{{ form_row(commentForm.contenuCommentaire) }}
+
+					<!-- / .table-responsive -->
+
+					 <!-- Pagination -->
+                <div class="card-footer">
+                    <nav aria-label="Navigation des pages">
+                        <ul class="pagination justify-content-center">
+                            {% set totalPages = posts|length // 3 + 1 %}
+                            {% for page in 1..totalPages %}
+                                <li class="page-item {% if page == 1 %}active{% endif %}">
+                                    <a class="page-link" href="{{ path('publications', {'page': page}) }}">{{ page }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-					<button type="submit" class="btn btn-primary">Ajouter le commentaire</button>
-					{{ form_end(commentForm) }}
-				</form>
 			</div>
 		</div>
-	</div>
-</div></div>{% endblock %}
-{% block javascripts %}
- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script>
+	</main>
+</div></div>{% endblock %}{% block javascripts %}
+<script src="{{ asset('./assets/javascript/home.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+ 
 
-
-var map = L.map('map').setView([
-50.62925, 3.057256
-], 13); // Coordonnées de Lille
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map);
-
-var popupContent = "Station de métro Rihour, Lille";
-
-var rihourMarker = L.marker([50.635649, 3.063008]).addTo(map).bindPopup(popupContent).openPopup();
-
-// Gestionnaire d'événements pour le clic sur la station Rihour
-rihourMarker.on('click', function (e) {
-rihourMarker.setPopupContent("La station Rihour est en panne !");
-});
-
-var popupContent2 = "Station de métro République beaux arts, Lille";
-
-L.marker([50.631641, 3.06083]).addTo(map).bindPopup(popupContent2).openPopup();
-
-map.on('click', function (e) {
-alert("Coordonnées du clic : " + e.latlng.toString());
-
-});
-
-
-
-
-document.addEventListener('click', function (e) {
-if (e.target && e.target.classList.contains('open-comment-modal')) {
-const postId = e.target.getAttribute('data-post-id'); // Récupérer l'ID du post
-const modal = document.querySelector('#createCommentModal');
-
-// Mettre à jour le formulaire avec l'ID du post
-const form = modal.querySelector('form');
-const action = form.getAttribute('action');
-form.setAttribute('action', action.replace('__postId__', postId));
-
-// Ouvrir le modal
-$('#createCommentModal').modal('show');
-
-}
-});
-console.log(postId);
-
-var commentForm = document.querySelector('#createCommentModal form');
-var commentButton = document.querySelector('.open-comment-modal');
-var commentModal = new bootstrap.Modal(document.getElementById('createCommentModal'));
-
-if (commentForm) {
-commentForm.addEventListener('submit', function (e) {
-e.preventDefault();
-commentModal.hide();
-// Réinitialiser le formulaire après l'envoi
-commentForm.reset();
-});
-}
-
-
-
-</script>
-{% endblock %}
-{% endblock %}
+{% endblock %}{% endblock %}
 
