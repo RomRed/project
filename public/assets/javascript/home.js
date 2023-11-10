@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map);
     
-    var metroStations = [
-    {
+    var metroStations = [  // mon objet qui contient toutes les stations pour comparer avec la bdd pour afficher les warning sur la carte
+    {  
     name: "PORTE DES POSTES",
     commune: "LILLE",
     insee: "350",
@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Créez des icônes personnalisées pour chaque ligne
     var yellowIcon = L.icon({
-    iconUrl: './assets/images/marker-svgrepo-comY.svg',
+    iconUrl: './assets/images/marker-svgrepo-comY.svg', // les icone jaune de la ligne 1 
     iconSize: [
     25, 41
     ], // Taille de l'icône
@@ -396,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
     popupAnchor: [0, -41] // Point d'ancrage de la popup
     });
     
-    var redIcon = L.icon({
+    var redIcon = L.icon({ 
     iconUrl: './assets/images/marker-svgrepo-comR.svg',
     iconSize: [
     25, 41
@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function () {
     popupAnchor: [0, -41]
     });
     
-    var warningIcon = L.icon({
+    var warningIcon = L.icon({  
         iconUrl: './assets/images/warning-svgrepo-com(2).svg',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
@@ -426,22 +426,22 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Vous pouvez également ouvrir la popup par défaut si vous le souhaitez
     if (i === 0) {
-    marker.openPopup();
+    marker.openPopup(); 
     }
-    console.log(metroStations[i].name);
+    console.log(metroStations[i].name); // on va les comparer a celle de l'objet present sur la carte 
     }
 // liste d'éléments <td> dans variable tdElements
-var tdElements = document.querySelectorAll('.metro-station');
+var tdElements = document.querySelectorAll('.metro-station'); // les elements td c'est la ou il y a les stations de la bdd
 
 // Boucle sur chaque élément <td>
 tdElements.forEach(function (tdElement) {
     // Extraire le texte de l'élément <td> et le nettoyer
-    var tdValue = tdElement.innerText.replace(/-\s*Ligne\s*\d*\s*$/, '').trim();
+    var tdValue = tdElement.innerText.replace(/-\s*Ligne\s*\d*\s*$/, '').trim(); // cette ligne va enlever les espaces et "- ligne 1/2"
 
     // Afficher la valeur nettoyée de l'élément <td> dans la console
-    console.log("Valeur nettoyée de l'élément <td> :", tdValue);
+    console.log("Valeur nettoyée de l'élément <td> :", tdValue);// affiche la valeur td sans - ligne ect...
 
-    // Boucle sur les valeurs du tableau metroStations
+    // Boucle sur les valeurs du tableau metroStations (l'objet)
     for (var i = 0; i < metroStations.length; i++) {
         // Comparer avec la valeur nettoyée de l'élément <td>
         if (tdValue == metroStations[i].name) {
@@ -462,14 +462,13 @@ tdElements.forEach(function (tdElement) {
             // Sortir de la boucle une fois qu'une correspondance est trouvée
             break;
         }
-    }
+    } // tout ça pour afficher un warning sur les stations presentes dans un ou plusieurs post sur la carte
 });
-
 
 
 // afficher les coordonnées gps au clique sur la carte 
     map.on('click', function (e) {
-    alert("Coordonnées du clic : " + e.latlng.toString());
+    alert("Coordonnées du clic : " + e.latlng.toString()); 
     
     });
     
@@ -487,7 +486,7 @@ tdElements.forEach(function (tdElement) {
     form.setAttribute('action', action.replace('__postId__', postId));
     
     // Ouvrir le modal
-    $('#createCommentModal').modal('show');
+    $('#createCommentModal').modal('show'); // pour ouvir l'input de commentaire et mettre le commentaire sous le post concerner
     
     }
     });

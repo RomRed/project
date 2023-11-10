@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Post;
+use App\Entity\Station;
 use App\Entity\Avispost;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
@@ -34,7 +35,8 @@ public function index(Request $request): Response
     // Récupérez la liste des posts
     $posts = $this->managerRegistry->getRepository(Post::class)->findAll();
     $post = $this->managerRegistry->getRepository(Post::class)->findAll();
-    
+    $station = $this->managerRegistry->getRepository(Station::class)->findAll();
+    $stations = $this->managerRegistry->getRepository(Station::class)->findAll();
     // Ajoutez le code pour récupérer les commentaires associés à chaque post
     $commentsByPost = [];
 
@@ -62,6 +64,8 @@ public function index(Request $request): Response
     return $this->render('post/index.html.twig', [
         'post' => $post,
         'posts' => $posts,
+        'station' => $station,
+        'stations'=>  $stations,
         'commentsByPost' => $commentsByPost,
         'commentForm' => $commentForm->createView(),
     ]);

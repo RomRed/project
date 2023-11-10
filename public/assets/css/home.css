@@ -1,7 +1,345 @@
-.text-yellow {
-    color: yellow;
+
+.card-header1 {
+    background-color: yellow;
 }
 
-.text-red {
-    color: red;
+span.sep-container01 .sep {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
 }
+
+.sep-container01 {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+span.sep-container01 .sep {
+    background-color: yellow;
+    border: 0;
+    height: calc(65% + 2px);
+    width: 12px;
+    position: absolute;
+    left: 7px;
+    top: 18px;
+}
+
+.sep-container01 .circle {
+    background-color: white;
+    border: 3px solid #505050;
+    box-shadow: 0 0 0 3px #EEEEEE;
+    border-radius: 100%;
+    height: 22px !important;
+    width: 22px !important;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.sep-container01 .circle .circle-inner {
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 3px #ffffff;
+}
+
+.sep-container01 .circle-inner {
+    background-color: yellow;
+}
+
+span.sep-container .sep {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+.sep-container {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+span.sep-container .sep {
+    background-color: yellow;
+    border: 0;                                                     
+    height: calc(100% + 2px);
+    width: 12px;
+    position: absolute;
+    left: 7px;
+    top: 0;
+}
+
+.sep-container .circle {
+    background-color: white;
+    border: 3px solid #505050;
+    box-shadow: 0 0 0 3px #EEEEEE;
+    border-radius: 100%;
+    height: 22px !important;
+    width: 22px !important;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.sep-container .circle .circle-inner {
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 3px #ffffff;
+}
+
+.sep-container .circle-inner {
+    background-color: yellow;
+}
+
+.sep-container01F {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+.sep-container01F {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+span.sep-container01F .sep {
+    background-color: yellow;
+    border: 0;
+    height: calc(65% + 2px);
+    width: 12px;
+    position: absolute;
+    left: 7px;
+    top: 0px;
+}
+
+.sep-container01F .circle {
+    background-color: white;
+    border: 3px solid #505050;
+    box-shadow: 0 0 0 3px #EEEEEE;
+    border-radius: 100%;
+    height: 22px !important;
+    width: 22px !important;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.sep-container01F .circle .circle-inner {
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 3px #ffffff;
+}
+
+.sep-container01F .circle-inner {
+    background-color: yellow;
+}
+
+.card-header2 {
+    background-color: red;
+}
+
+span.sep-container2D .sep {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+.sep-container2D {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+span.sep-container2D .sep {
+    background-color: red;
+    border: 0;
+    height: calc(65% + 2px);
+    width: 12px;
+    position: absolute;
+    left: 7px;
+    top: 18px;
+}
+
+.sep-container2D .circle {
+    background-color: white;
+    border: 3px solid #505050;
+    box-shadow: 0 0 0 3px #EEEEEE;
+    border-radius: 100%;
+    height: 22px !important;
+    width: 22px !important;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.sep-container2D .circle .circle-inner {
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 3px #ffffff;
+}
+
+.sep-container2D .circle-inner {
+    background-color: red;
+}
+
+.sep-container2 {
+
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+span.sep-container2 .sep {
+    background-color: red;
+    border: 0;
+    height: calc(100% + 2px);
+    width: 12px;
+    position: absolute;
+    left: 7px;
+    top: 0;
+}
+
+.sep-container2 .circle {
+    background-color: white;
+    border: 3px solid #505050;
+    box-shadow: 0 0 0 3px #EEEEEE;
+    border-radius: 100%;
+    height: 22px !important;
+    width: 22px !important;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.sep-container2 .circle .circle-inner {
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 3px #ffffff;
+}
+
+.sep-container2 .circle-inner {
+    background-color: red;
+}
+
+.sep-container2F {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+.sep-container2F {
+    height: 100%;
+    left: 100px;
+    position: absolute;
+    width: 28px;
+    top: 0;
+}
+
+span.sep-container2F .sep {
+    background-color: red;
+    border: 0;
+    height: calc(65% + 2px);
+    width: 12px;
+    position: absolute;
+    left: 7px;
+    top: 0px;
+}
+
+.sep-container2F .circle {
+    background-color: white;
+    border: 3px solid #505050;
+    box-shadow: 0 0 0 3px #EEEEEE;
+    border-radius: 100%;
+    height: 22px !important;
+    width: 22px !important;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.sep-container2F .circle .circle-inner {
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: solid 3px #ffffff;
+}
+
+.sep-container2F .circle-inner {
+    background-color: red;
+}
+
+.nom-station {
+    margin-left: 120px;
+    font-weight: bold;
+    max-width: 45%;
+}
+
+.accordion-item {
+    padding: 0;
+  }
+  
+  .accordion-item .card-body {
+    padding: 0;
+  }
