@@ -10,11 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class InscriptionUtilisateurController extends AbstractController
 {
     #[Route('/inscription-utilisateur', name: 'app_inscription_utilisateur')]
-    public function inscription(Request $request, EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher): Response
+    public function inscription(  SessionInterface $session, Request $request, EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher): Response
     {
         $utilisateur = new Utilisateur();
         
@@ -39,7 +40,8 @@ class InscriptionUtilisateurController extends AbstractController
                 $entityManager->persist($utilisateur);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_connexion');
+                $this->addFlash('success', 'Inscription réussie ! Connectez-vous avec votre nouveau compte.');
+                return $this->redirectToRoute('app_connexion_deconnexion');
             }
         
 

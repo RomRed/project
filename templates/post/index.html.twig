@@ -137,308 +137,156 @@
 
 						<div class="row">
 							<div><input type="text" id="station-search" placeholder="votre station" class="">
-								<button class="btn btn-primary">rechercher</button>
+								<button id="search-button" class="btn btn-primary">rechercher</button>
 							</div>
-							<div
-								{# class="col">
-								<!-- Card -->
-								<div class="card border-0 flex-fill w-100" style="background-color:#cddde8;" data-list="{&quot;valueNames&quot;: [&quot;name&quot;, &quot;email&quot;, &quot;id&quot;, {&quot;name&quot;: &quot;date&quot;, &quot;attr&quot;: &quot;data-signed&quot;}, &quot;status&quot;], &quot;page&quot;: 8}" id="users">
-									<div
-										class="card-header border-0 card-header-space-between">
+							<div class="row">{% for ligne in [1, 2] %}
+<div class="col-lg-6">
 
-										<!-- Title -->
-										<h5 class="card-header-title  text-uppercase text-center text-light">
-											Problème(s) signalé(s) :
-										</h5>
-										<!-- Table --> 
-										<div class="table-responsive">
-											<table class="table table-bordered table-hover">
-												<thead class="thead-light">
-													<tr>
-														<th>
-															<a class="text-muted list-sort" data-sort="name">
-																Publié par :
-															</a>
-														</th>
-														<th>
-															<a class="text-muted list-sort" data-sort="email">
-																Message :
-															</a>
-														</th>
-														<th>
-															<a class="text-muted list-sort" data-sort="id">
-																Station :
-															</a>
-														</th>
-														<th>
-															<a class="text-muted list-sort" data-sort="date">
-																Catégorie :
-															</a>
-														</th>
-														<th class="w-150px min-w-150px">
-															<a class="text-muted list-sort" data-sort="status">
-																Avis :
-															</a>
-														</th>
-														<th class="w-150px min-w-150px">
-															<a class="text-muted list-sort" data-sort="status">
-																voir/ajouter commentaire :
-															</a>
-														</th>
-													</tr>
-												</thead>
-												<tbody class="list">
-													{% for post in posts %}
-														<tr>
-															<td>
-																<span class="name fw-bold">{{ post.idUtlisateur.prenomUtilisateur }}</span>
-															</td>
-															<td class="email">{{ post.contenuPost }}</td>
-															<td class="id metro-station">
-																{{ post.idStation.nomStation }}
-																- Ligne
-																{{ post.idStation.ligne }}
-															</td>
-															<td class="date">
-																{% if post.idCategorie.libCategorie == 'ascenseur' %}
-																	<img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" width="10%">
-																{% elseif post.idCategorie.libCategorie == 'escalator' %}
-																	<img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" width="10%">
-																{% elseif post.idCategorie.libCategorie == 'Forte affluence' %}
-																	<img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" width="10%">
-																{% elseif post.idCategorie.libCategorie == 'Travaux' %}
-																	<img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" width="10%">
-																{% endif %}
-																{{ post.idCategorie.libCategorie }}
+	<div class="card mt-5 text-center">
+		<div class="card-header bg-{{ ligne == 1 ? 'warning' : 'danger' }}">
+			<h2 class="text-light ">Métro ligne
+				{{ ligne }}</h2>
+		</div>
 
-															</td>
-															<td class="status">
-																<div>
-																	<a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
-																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-grin-fill" viewbox="0 0 16 16">
-																			<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM6.488 7c-.23-.598-.661-1-1.155-1-.493 0-.924.402-1.155 1A2.794 2.794 0 0 1 4 6c0-1.105.597-2 1.333-2 .737 0 1.334.895 1.334 2 0 .364-.065.706-.179 1Zm5.334 0c-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6c0 .364-.065.706-.178 1ZM2.696 8.756a.48.48 0 0 1 .382-.118C4.348 8.786 6.448 9 8 9c1.553 0 3.653-.214 4.922-.362a.48.48 0 0 1 .383.118.3.3 0 0 1 .096.29c-.09.47-.242.921-.445 1.342-.263.035-.576.075-.929.115A36.798 36.798 0 0 1 8 10.75c-1.475 0-2.934-.123-4.027-.247-.353-.04-.666-.08-.93-.115A5.457 5.457 0 0 1 2.6 9.045a.3.3 0 0 1 .097-.29ZM8 13.5a5.49 5.49 0 0 1-4.256-2.017l.116.014c1.115.126 2.615.253 4.14.253 1.525 0 3.025-.127 4.14-.253l.117-.014A5.49 5.49 0 0 1 8 13.5Z"/>
-																		</svg>
-																		{{ post.postConfirmer }}
-																	</a>
-																</div>
-																<a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
-																	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown-fill" viewbox="0 0 16 16">
-																		<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-																	</svg>
-																	{{ post.postInfirmer }}
-																</a>
-															</td>
-															<td>
-																<button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
-																	Ajouter commentaire
-																</button>
-																<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#commentsCollapse{{ post.idPost }}">
-																	Voir commentaires
-																</button>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="6">
-																<div id="commentsCollapse{{ post.idPost }}" class="collapse">
-																	<h6>Commentaires :</h6>
-																	<ul>
-																		{% for comment in commentsByPost[post.idPost] %}
-																			<li>
-																				<strong>Commenté par :
-																					{{ comment.idUtlisateur.prenomUtilisateur }}</strong>
-																				{{ comment.contenuCommentaire }}
-																			</li>
-																		{% endfor %}
-																	</ul>
-																</div>
-															</td>
-														</tr>
-													{% endfor %}
-												</tbody>
-											</table>
-										</div>
+		{% for station in stations %}
+			{% if station.ligne == ligne %}
+				<div class="card-body">
 
-										<!-- / .table-responsive -->
+					<div class="accordion" id="accordionPanelsStayOpenExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ station.idStation }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ station.idStation }}">
+									<span class=" {{ ligne == 1 ? 'sep-container' : 'sep-container2' }}">
+										<span class="sep"></span>
+										<span class="circle">
+											<span class="circle-inner"></span>
+										</span>
+									</span>
 
-										<!-- Pagination -->
-										<div class="card-footer">
-											<nav aria-label="Navigation des pages">
-												<ul class="pagination justify-content-center">
-													{% set totalPages = posts|length // 3 + 1 %}
-													{% for page in 1..totalPages %}
-														<li class="page-item {% if page == 1 %}active{% endif %}">
-															<a class="page-link" href="{{ path('publications', {'page': page}) }}">{{ page }}</a>
-														</li>
-													{% endfor %}
-												</ul>
-											</nav>
-										</div>
+									<span class="nom-station">{{ station.nomStation }}
+										{% set stationImageDisplayed = false %} {# va affichier une fois l'image meme si il y a plusieurs post par station #}
+										{% for post in posts %}
+											{% if post.idStation.nomStation == station.nomStation and not stationImageDisplayed %}
+												<img src="./assets/images/warning-svgrepo-com(2).svg" alt="Logo de la station" class="warning-logo" height="auto" width="20rem">
+												{% set stationImageDisplayed = true %}
+											{% endif %}
+										{% endfor %}
 
-									</div>
-								</div>
-							</div>
-
-							</div> #}
-								<div class="row">
-					{% for ligne in [1, 2] %} 
-						<div class="col-lg-6">
-
-							<div class="card mt-5 text-center">
-								<div class="card-header bg-{{ ligne == 1 ? 'warning' : 'danger' }}"> 
-									<h2 class="text-light ">Métro ligne
-										{{ ligne }}</h2>
-								</div>
-
-								{% for station in stations %} 
-									{% if station.ligne == ligne %}
-										<div class="card-body">
-
-											<div class="accordion" id="accordionPanelsStayOpenExample">
-												<div class="accordion-item">
-													<h2 class="accordion-header">
-														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ station.idStation }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ station.idStation }}">
-															<span class=" {{ ligne == 1 ? 'sep-container' : 'sep-container2' }}">
-																<span class="sep"></span>
-																<span class="circle">
-																	<span class="circle-inner"></span>
-																</span>
-															</span>
-															 
-															<span class="nom-station">{{ station.nomStation }}{% for post in posts %}{% if post.idStation.nomStation == station.nomStation %} <img src="./assets/images/warning-svgrepo-com(2).svg" alt="Logo de la station" class="warning-logo" height="auto" width="20rem">{% endif %}{% endfor %}</span>
-														</button>
-													</h2>																
-													<div id="panelsStayOpen-collapse{{ station.idStation }}" class="accordion-collapse collapse ">
-														<div class="accordion-body">
-															{% for post in posts %}
-																{% if post.idStation.nomStation == station.nomStation %}
-																	<table class="table table-bordered table-hover">
-																		<thead class="thead-light">
-																			<tr>
-																				<th>
-																					<a class="text-muted list-sort" data-sort="name">
-																						Publié par :
-																					</a>
-																				</th>
-																				<th>
-																					<a class="text-muted list-sort" data-sort="email">
-																						Message :
-																					</a>
-																				</th>
-																				<th>
-																					<a class="text-muted list-sort" data-sort="id">
-																						Station :
-																					</a>
-																				</th>
-																				<th>
-																					<a class="text-muted list-sort" data-sort="date">
-																						Catégorie :
-																					</a>
-																				</th>
-																				<th class="w-150px min-w-150px">
-																					<a class="text-muted list-sort" data-sort="status">
-																						Avis :
-																					</a>
-																				</th>
-																				<th class="w-150px min-w-150px">
-																					<a class="text-muted list-sort" data-sort="status">
-																						voir/ajouter commentaire :
-																					</a>
-																				</th>
-																			</tr>
-																		</thead>
-																		<tbody class="list">
-																			<tr>
-																				<td>
-																					<span class="name fw-bold">{{ post.idUtlisateur.prenomUtilisateur }}</span>
-																				</td>
-																				<td class="email">{{ post.contenuPost }}</td>
-																				<td class="id metro-station">
-																					{{ post.idStation.nomStation }}
-																					- Ligne
-																					{{ post.idStation.ligne }}
-																				</td>
-																				<td class="date">
-																					{% if post.idCategorie.libCategorie == 'ascenseur' %}
-																						<img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" width="20%">
-																					{% elseif post.idCategorie.libCategorie == 'escalator' %}
-																						<img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" width="20%">
-																					{% elseif post.idCategorie.libCategorie == 'Forte affluence' %}
-																						<img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" width="20%">
-																					{% elseif post.idCategorie.libCategorie == 'Travaux' %}
-																						<img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" width="20%">
-																					{% endif %}
-																					{{ post.idCategorie.libCategorie }}
-
-																				</td>
-																				<td class="status">
-																					<div>
-																						<a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
-																							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-grin-fill" viewbox="0 0 16 16">
-																								<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM6.488 7c-.23-.598-.661-1-1.155-1-.493 0-.924.402-1.155 1A2.794 2.794 0 0 1 4 6c0-1.105.597-2 1.333-2 .737 0 1.334.895 1.334 2 0 .364-.065.706-.179 1Zm5.334 0c-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6c0 .364-.065.706-.178 1ZM2.696 8.756a.48.48 0 0 1 .382-.118C4.348 8.786 6.448 9 8 9c1.553 0 3.653-.214 4.922-.362a.48.48 0 0 1 .383.118.3.3 0 0 1 .096.29c-.09.47-.242.921-.445 1.342-.263.035-.576.075-.929.115A36.798 36.798 0 0 1 8 10.75c-1.475 0-2.934-.123-4.027-.247-.353-.04-.666-.08-.93-.115A5.457 5.457 0 0 1 2.6 9.045a.3.3 0 0 1 .097-.29ZM8 13.5a5.49 5.49 0 0 1-4.256-2.017l.116.014c1.115.126 2.615.253 4.14.253 1.525 0 3.025-.127 4.14-.253l.117-.014A5.49 5.49 0 0 1 8 13.5Z"/>
-																							</svg>
-																							{{ post.postConfirmer }}
-																						</a>
-																					</div>
-																					<a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
-																						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown-fill" viewbox="0 0 16 16">
-																							<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-																						</svg>
-																						{{ post.postInfirmer }}
-																					</a>
-																				</td>
-																				<td>
-																					<button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
-																						Ajouter commentaire
-																					</button>
-																					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#commentsCollapse{{ post.idPost }}">
-																						Voir commentaires
-																					</button>
-																				</td>
-																			</tr>
-																			<tr>
-																				<td colspan="6">
-																					<div id="commentsCollapse{{ post.idPost }}" class="collapse">
-																						<h6>Commentaires :</h6>
-																						<ul>
-																							{% for comment in commentsByPost[post.idPost] %}
-																								<li>
-																									<strong>Commenté par :
-																										{{ comment.idUtlisateur.prenomUtilisateur }}</strong>
-																									{{ comment.contenuCommentaire }}
-																								</li>
-																							{% endfor %}
-																						</ul>
-																					</div>
-																				</td>
-																			</tr>
-
-																		</tbody>
-																	</table>
-																{% endif %}
-															{% endfor %}
-														</div>
-													</div>
+									</span>
+								</button>
+							</h2>
+							<div id="panelsStayOpen-collapse{{ station.idStation }}" class="accordion-collapse collapse ">
+								<div class="accordion-body">
+									{% for post in posts %}
+										{% if post.idStation.nomStation == station.nomStation %}
+											<div class="card mt-3">
+												<div class="card-header bg-light">
+													<h5 class="card-title">Publié par:
+														{{ post.idUtlisateur.prenomUtilisateur }}</h5>
 												</div>
+												<div class="card-body">
+													<strong class="d-flex justify-content-start">Message:</strong>
+													<p class="card-text">
+														{{ post.contenuPost }}</p>
+													<strong class="d-flex justify-content-start">Station:</strong>
+													<p class="card-text metro-station">
+														{{ post.idStation.nomStation }}
+														- Ligne
+														{{ post.idStation.ligne }}</p>
+													<strong class="d-flex justify-content-start">Catégorie:</strong>
+													<p class="card-text">
+														{% if post.idCategorie.libCategorie == 'ascenseur' %}
+															<img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" width="10%">
+														{% elseif post.idCategorie.libCategorie == 'escalator' %}
+															<img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" width="10%">
+														{% elseif post.idCategorie.libCategorie == 'Forte affluence' %}
+															<img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" width="10%">
+														{% elseif post.idCategorie.libCategorie == 'Travaux' %}
+															<img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" width="10%">
+														{% endif %}
+														{{ post.idCategorie.libCategorie }}
+													</p>
+												</div>
+												<ul class="list-group list-group-flush">
+													<li class="list-group-item">
+														<a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewbox="0 0 16 16">
+																<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+															</svg>
+															{{ post.postConfirmer }}
+														</a>
+														<a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down-fill" viewbox="0 0 16 16">
+																<path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.378 1.378 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51.136.02.285.037.443.051.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.896 1.896 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2.094 2.094 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.162 3.162 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.823 4.823 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591z"/>
+															</svg>
+															{{ post.postInfirmer }}
+														</a>
+													</li>
+													<li class="list-group-item">
+														<button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
+															Ajouter commentaire
+														</button>
+														<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#commentsCollapse{{ post.idPost }}">
+															Voir commentaires
+														</button>
+													</li>
+													<li class="list-group-item">
+														<div id="commentsCollapse{{ post.idPost }}" class="collapse">
+															<h6>Commentaires :</h6>
+															<ul>
+																{% for comment in commentsByPost[post.idPost] %}
+																	<li>
+																		<strong>Commenté par:
+																			{{ comment.idUtlisateur.prenomUtilisateur }}</strong>
+																		{{ comment.contenuCommentaire }}
+																	</li>
+																{% endfor %}
+															</ul>
+														</div>
+													</li>
+												</ul>
 											</div>
-										</div>
-									{% endif %}
-								{% endfor %}
+										{% endif %}
+									{% endfor %}
 
+								</div>
 							</div>
 						</div>
-					{% endfor %}
-				</div>
-
-						</main>
 					</div>
 				</div>
-			
-			{% endblock %}
-			{% block javascripts %}
-				<script src="{{ asset('./assets/javascript/home.js') }}"></script>
-				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-				<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+			{% endif %}
+		{% endfor %}
 
-			{% endblock %}
-		{% endblock %}
+	</div>
+</div>{% endfor %}</div></main></div></div>{% endblock %}{% block javascripts %}<script src="{{ asset('./assets/javascript/home.js') }}"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script><script src="https://code.jquery.com/jquery-3.6.4.min.js"></script><script>$(document).ready(function () { // Fonction pour filtrer les stations en fonction de la requête
+function filterStations(query) { // Obtenir tous les éléments de station
+var stations = $('.accordion');
+
+// Filtrer les stations qui contiennent la requête/recherche dans le nom
+var filteredStations = stations.filter(function () {
+var stationName = $(this).find('.nom-station').text();
+return stationName.toLowerCase().includes(query.toLowerCase());
+});
+
+// Masquer toutes les stations et ne montrer que celles filtrées
+stations.hide();
+filteredStations.show();
+
+console.log(filteredStations);
+// Afficher la valeur saisie sur la page
+$('#entered-value').text('Valeur saisie : ' + query);
+}
+
+// Écouteur d'événements pour le champ de saisie
+$('#station-search').on('input', function () {
+var query = $(this).val();
+filterStations(query);
+});
+
+// Écouteur d'événements pour le bouton de recherche
+$('#search-button').on('click', function () {
+var query = $('#station-search').val();
+filterStations(query);
+});
+});</script>{% endblock %}{% endblock %}
 

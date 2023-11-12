@@ -503,5 +503,4 @@ tdElements.forEach(function (tdElement) {
     // Réinitialiser le formulaire après l'envoi
     commentForm.reset();
     });
-                            
     }

@@ -3,6 +3,11 @@
 {% block title %}Hello AuthController!{% endblock %}
 
 {% block body %}
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto mt-5">
