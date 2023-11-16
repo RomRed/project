@@ -8,6 +8,7 @@ use App\Entity\Station;
 use App\Entity\Avispost;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
+use App\Entity\Aviscommentaire;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -211,6 +212,116 @@ public function addComment(Request $request, $id): Response
         return $this->redirectToRoute('publications');
     }
 }
+
+// ...
+
+/**
+ * @Route("/comment/confirm/{id}", name="comment_confirm")
+ */
+public function confirmComment(Request $request, $id, Security $security): Response
+{
+    $entityManager = $this->entityManager;
+    $comment = $entityManager->getRepository(Commentaire::class)->find($id);
+    $user = $this->getUser(); // Récupérez l'utilisateur connecté
+
+    if (!$comment || !$user) {
+        // Gérer le cas où le commentaire ou l'utilisateur n'existe pas
+        // Redirigez ou affichez un message d'erreur approprié
+    }
+
+    // Vérifiez si l'utilisateur est le propriétaire du commentaire
+    if ($comment->getIdUtlisateur() === $user) {
+        // L'utilisateur ne peut pas confirmer son propre commentaire
+        $this->addFlash('error', 'Vous ne pouvez pas confirmer votre propre commentaire.');
+        return $this->redirectToRoute('publications');
+    }
+
+    // Vérifiez si l'utilisateur a déjà confirmé ce commentaire
+    $existingAvis = $entityManager->getRepository(Aviscommentaire::class)->findOneBy([
+        'idCommentaire' => $comment,
+        'idUtlisateur' => $user,
+        // 'isvrai' => true, // Vérifiez si l'utilisateur a déjà confirmé le commentaire
+    ]);
+
+    if ($existingAvis) {
+        // L'utilisateur a déjà confirmé ce commentaire
+        $this->addFlash('error', 'Vous avez déjà confirmé/infirmé ce commentaire.');
+        return $this->redirectToRoute('publications');
+    }
+
+    // Créez un avis pour confirmer le commentaire
+    $avis = new Aviscommentaire();
+    $avis->setIsvrai(true); // "true" signifie confirmé
+    $avis->setIdCommentaire($comment);
+    $avis->setIdUtlisateur($user);
+
+    $entityManager->persist($avis);
+    $comment->setPostConfirmer($comment->getPostConfirmer() + 1);
+
+    // Mettez à jour le compteur de points de l'utilisateur qui a fait le commentaire
+    $utilisateurDuCommentaire = $comment->getIdUtlisateur();
+    $utilisateurDuCommentaire->setCompteurpoint($utilisateurDuCommentaire->getCompteurpoint() + 5);
+
+    $entityManager->persist($comment);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('publications');
+}
+
+/**
+ * @Route("/comment/infirm/{id}", name="comment_infirm")
+ */
+public function infirmComment(Request $request, $id, Security $security): Response
+{
+    $entityManager = $this->entityManager;
+    $comment = $entityManager->getRepository(Commentaire::class)->find($id);
+    $user = $this->getUser(); // Récupérez l'utilisateur connecté
+
+    if (!$comment || !$user) {
+        // Gérer le cas où le commentaire ou l'utilisateur n'existe pas
+        // Redirigez ou affichez un message d'erreur approprié
+    }
+
+    // Vérifiez si l'utilisateur est le propriétaire du commentaire
+    if ($comment->getIdUtlisateur() === $user) {
+        // L'utilisateur ne peut pas infirmer son propre commentaire
+        $this->addFlash('error', 'Vous ne pouvez pas infirmer votre propre commentaire.');
+        return $this->redirectToRoute('publications');
+    }
+
+    // Vérifiez si l'utilisateur a déjà infirmé ce commentaire
+    $existingAvis = $entityManager->getRepository(Aviscommentaire::class)->findOneBy([
+        'idCommentaire' => $comment,
+        'idUtlisateur' => $user,
+        // 'isvrai' => false, // Vérifiez si l'utilisateur a déjà infirmé le commentaire
+    ]);
+
+    if ($existingAvis) {
+        // L'utilisateur a déjà infirmé ce commentaire
+        $this->addFlash('error', 'Vous avez déjà infirmé/confirmé ce commentaire.');
+        return $this->redirectToRoute('publications');
+    }
+
+    // Créez un avis pour infirmer le commentaire
+    $avis = new Aviscommentaire();
+    $avis->setIsvrai(false); // "false" signifie infirmé
+    $avis->setIdCommentaire($comment);
+    $avis->setIdUtlisateur($user);
+
+    $entityManager->persist($avis);
+    $comment->setPostInfirmer($comment->getPostInfirmer() + 1);
+
+    // Mettez à jour le compteur de points de l'utilisateur qui a fait le commentaire
+    $utilisateurDuCommentaire = $comment->getIdUtlisateur();
+    $utilisateurDuCommentaire->setCompteurpoint($utilisateurDuCommentaire->getCompteurpoint() - 2);
+
+    $entityManager->persist($comment);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('publications');
+}
+
+// ...
 
 }
 

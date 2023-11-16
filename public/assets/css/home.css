@@ -343,3 +343,13 @@ span.sep-container2F .sep {
   .accordion-item .card-body {
     padding: 0;
   }
+
+.paddingZero{
+    padding: 0;
+    flex: 1 1 auto;
+}
+
+.liste{
+    list-style:none;
+    text-decoration: none;
+}

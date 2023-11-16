@@ -20,3 +20,12 @@ api_controller:
     path: /api/users
     controller: App\Controller\ApiController::getUsers
     methods: [GET,POST,DELETE,UPDATE]
+
+
+comment_confirm:
+    path: '/comment/confirm/{id}'
+    controller: 'App\Controller\PostController::confirmComment'
+
+comment_infirm:
+    path: '/comment/infirm/{id}'
+    controller: 'App\Controller\PostController::infirmComment'

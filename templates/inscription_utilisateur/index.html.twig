@@ -1,38 +1,129 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InscriptionUtilisateurController!{% endblock %}
-
+{% block title %}Hello InscriptionUtilisateurController!
+{% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('./assets/css/inscription.css') }}" rel="stylesheet"/>
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+	<div class="container">
+		<div
+			class="row py-5 mt-4 align-items-center">
+			<!-- For Demo Purpose -->
+			<div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+				<img src="./assets/images/logoMobility.png" alt="" class="img-fluid mb-3 d-none d-md-block">
+				<h1>Inscrivez Vous !</h1>
+				<p class="font-italic text-muted mb-0">Creer un compte pour avoir accès à toutes les Fonctionnalitées</p>
+			</div>
 
-    <section class="container bg-dark text-light mt-5 rounded">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-center mt-2">INSCRIPTION</h1>
-                {{ form_start(utilisateurForm) }}
-                    <fieldset class="mb-3">
-                        <legend class="text-center mt-2">Mon identité</legend>
+			<!-- Registeration Form -->
+			<div class="col-md-7 col-lg-6 ml-auto">
+				{{ form_start(utilisateurForm) }}
+				<div
+					class="row">
 
-                        
-                        {{ form_row(utilisateurForm.prenomUtilisateur) }}
-                        {{ form_row(utilisateurForm.emailUtilisateur) }}
-                        {{ form_row(utilisateurForm.telephone) }}
-                    </fieldset>
+					<!-- First Name -->
+					<div class="mb-4">
 
-                    {{ form_row(utilisateurForm.mdpUtlisateur, {
-                        label: 'Password'
-                    }) }}
-                    
-                    <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-dark btn-lg my-3">M'inscrire</button>
-                    <a href="{{ path('app_connexion') }}" class="btn btn-secondary btn-lg my-3">Me connecter</a>
-                    </div>
-                {{ form_end(utilisateurForm) }}            
-            </div>
-        </div>
-    </section>
-    {% endblock %}
+						{{ form_row(utilisateurForm.prenomUtilisateur) }}
+					</div>
+
+					<!-- Email Address -->
+					<div class="mb-4">
+						{{ form_row(utilisateurForm.emailUtilisateur) }}
+					</div>
+
+					<!-- Phone Number -->
+					<div class="mb-4">
+						{{ form_row(utilisateurForm.telephone) }}
+					</div>.
+
+					<!-- Password -->
+					<div class="mb-4">
+						{{ form_row(utilisateurForm.mdpUtlisateur) }}
+						<div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" id="showPassword" onclick="ShowPassword()">
+        <label class="form-check-label" for="showPassword">
+            Afficher le mot de passe
+        </label>
+    </div>
+					</div>
+
+					<!-- Submit Button -->
+					<div class="form-group text-center">
+						<Button type="submit" class="btn btn-primary btn-block py-2">
+							<span class="font-weight-bold">Creer un compte</span>
+						</button>
+					</div>
+
+					<!-- Divider Text -->
+					<div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+						<div class="border-bottom w-100 ml-5"></div>
+						<span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+						<div class="border-bottom w-100 mr-5"></div>
+					</div>
+
+					<!-- Social Login -->
+					<div class="social-login text-center">
+						<a href="#" class="facebook">
+							<span class="icon-facebook mr-3">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewbox="0 0 16 16">
+									<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+								</svg>
+							</span>
+						</a>
+						<a href="#" class="twitter">
+							<span class="icon-twitter mr-3">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewbox="0 0 16 16">
+									<path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+								</svg>
+							</span>
+						</a>
+						<a href="#" class="google">
+							<span class="icon-google mr-3">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewbox="0 0 16 16">
+									<path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+								</svg>
+							</span>
+						</a>
+					</div>
+
+					<!-- Already Registered -->
+					<div class="text-center w-100">
+						<p class="text-muted font-weight-bold">Déja Inscrit ?<a href="{{ path('app_connexion') }}" class="text-primary ml-2">Login</a>
+						</p>
+					</div>
+
+				</div>
+				{{ form_end(utilisateurForm) }}
+			</div>
+		</div>
+	</div>
+	{% block javascripts %}
+		<script>
+			$(function () {
+$('input, select').on('focus', function () {
+$(this).parent().find('.input-group-text').css('border-color', '#80bdff');
+});
+$('input, select').on('blur', function () {
+$(this).parent().find('.input-group-text').css('border-color', '#ced4da');
+});
+});
+
+    function ShowPassword() {
+        var passwordInput = document.getElementById("inscription_utilisateur_mdpUtlisateur");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    };
+		</script>
+	{% endblock %}
+{% endblock %}
 

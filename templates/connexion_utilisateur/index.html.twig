@@ -1,35 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AuthController!{% endblock %}
-
+{% block title %}Bienvenue sur Mobility{% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('./assets/css/connexion.css') }}" rel="stylesheet"/>
+{% endblock %}
 {% block body %}
 {% for flashMessage in app.flashes('success') %}
     <div class="alert alert-success">
         {{ flashMessage }}
     </div>
 {% endfor %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mx-auto mt-5">
-                <form method="post" action="{{ path('app_connexion') }}">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" name="_username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="_password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
+
+    <div class="content">
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+<img src="./assets/images/logoMobility.png" alt="Image" class="img-fluid">
+</div>
+<div class="col-md-6 contents">
+<div class="row justify-content-center">
+<div class="col-md-8">
+<div class="mb-4">
+<h3>Connectez Vous :</h3>
+<p class="mb-4">Avec Mobility, bouger sans soucis ! </p>
+</div>
+<form action="{{ path('app_connexion') }}"method="post">
+<div class="form-group first">
+
+<input type="text" class="form-control" id="username" name="_username" placeholder="E-mail">
+</div>
+<div class="form-group last mb-4">
+
+<input type="password" class="form-control" id="password" name="_password" placeholder="Mot de passe">
+</div>
+<input type="submit" value="Connexion" class="btn btn-block btn-primary">
+<span class="d-block text-left my-4 text-muted">&mdash; Ou connectez vous avec : &mdash;</span>
+<div class="social-login">
+<a href="#" class="facebook">
+<span class="icon-facebook mr-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+</svg></span>
+</a>
+<a href="#" class="twitter">
+<span class="icon-twitter mr-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+</svg></span>
+</a>
+<a href="#" class="google">
+<span class="icon-google mr-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+  <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+</svg></span>
+</a>
+</div>
                     <input type="hidden" name="_target_path" value="{{ path('dashboard_utilisateur') }}"/>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

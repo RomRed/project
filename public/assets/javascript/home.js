@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     var warningIcon = L.icon({  
-        iconUrl: './assets/images/warning-svgrepo-com(2).svg',
+        iconUrl: './assets/images/warning-svgrepo-com.svg',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [0, -41]
@@ -469,7 +469,7 @@ tdElements.forEach(function (tdElement) {
 // afficher les coordonnées gps au clique sur la carte 
     map.on('click', function (e) {
     alert("Coordonnées du clic : " + e.latlng.toString()); 
-    
+
     });
     
     });
@@ -504,3 +504,5 @@ tdElements.forEach(function (tdElement) {
     commentForm.reset();
     });
     }
+
+

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Avispost;
 use App\Entity\Commentaire;
+use App\Entity\Aviscommentaire;
 use App\Form\ModificationPostType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,20 +85,28 @@ public function supprimerPost(Request $request, $id): Response
 
     // Vérifiez si l'utilisateur actuel est le propriétaire de la publication
     if ($post && $post->getIdUtlisateur() === $this->getUser()) {
-        // Récupérez les avis associés à la publication en fonction de l'ID du poste
-        $avisPosts = $entityManager->getRepository(Avispost::class)->findBy(['idPost' => $post]);
-
-        // Parcourez les avis et supprimez-les
-        foreach ($avisPosts as $avis) {
-            $entityManager->remove($avis);
-        }
+        // Récupére les commentaires associés à la publication
         $commentaires = $entityManager->getRepository(Commentaire::class)->findBy(['idPost' => $post]);
 
+        // Supprime les avis commentaires associés aux commentaires de la publication
         foreach ($commentaires as $commentaire) {
+            $avisCommentaires = $entityManager->getRepository(Aviscommentaire::class)->findBy(['idCommentaire' => $commentaire->getIdCommentaire()]);
+
+            foreach ($avisCommentaires as $avisCommentaire) {
+                $entityManager->remove($avisCommentaire);
+            }
+
             $entityManager->remove($commentaire);
         }
-    
-        // Supprimez la publication
+
+        // Supprime les avis post associés à la publication
+        $avisPosts = $entityManager->getRepository(Avispost::class)->findBy(['idPost' => $post]);
+
+        foreach ($avisPosts as $avisPost) {
+            $entityManager->remove($avisPost);
+        }
+
+        // supprime la publication
         $entityManager->remove($post);
         $entityManager->flush();
 

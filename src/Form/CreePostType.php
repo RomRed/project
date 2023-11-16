@@ -18,7 +18,7 @@ class CreePostType extends AbstractType
     {
         $builder
         ->add('contenuPost', TextareaType::class, [
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control',  'placeholder' => 'panne d\'ascenceur... Travaux.... '],
             'label'=> 'Message :'
         ])
         ->add('idStation', EntityType::class, [

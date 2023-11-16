@@ -7,8 +7,11 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+<div class="card mt-5 mb-5 mx-2 my-2" style="background-color:#cddde8;">
 <div class="container mt-5">
-<h1 class="text-center">NOUVEAU POST</h1>
+<img src="./assets/images/logoMobility.png" alt="" width="100rem">
+<h1 class="text-center text-light">NOUVEAU POST</h1>
+<p class="text-center"><small>Besoin de déclaré une panne ? des travaux ?</small></p>
     {{ form_start(form) }}
 
             {{ form_row(form.contenuPost, {'attr': {'class': 'form-control mb-2'}}) }}
@@ -25,11 +28,11 @@
 
 {# <button id="getLocationButton">Obtenir la géolocalisation</button> #}
 <div class="text-center">
-    <button type="submit" class="btn btn-dark mt-2" >Envoyer</button>
+    <button type="submit" class="btn  mt-2 mb-2 text-light" style="background-color:#47657c;" >Poster</button>
 </div>
     {{ form_end(form) }}
 </div>
-
+</div>
 {% endblock %}
 {% block javascripts %}
 

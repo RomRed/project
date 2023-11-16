@@ -23,7 +23,7 @@
 						</a>
 
 						<!-- Navbar toggler -->
-						<div>
+						<div class="mb-5">
 							<a href="javascript: void(0);" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon text-light">
 									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewbox="0 0 16 16">
@@ -46,6 +46,11 @@
 										</svg>
 										<span>Home</span>
 									</a>
+								</li>
+								<li class="nav-item dropdown">
+												<a class="nav-link text-light" href="{{ path('app_cree_post') }}" role="button">
+													<span>Créer Post</span>
+												</a>
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link " href="#authenticationCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="authenticationCollapse">
@@ -79,11 +84,6 @@
 													<span>Déconnexion</span>
 												</a>
 											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{ path('app_cree_post') }}" role="button">
-													<span>Créer Post</span>
-												</a>
-											</li>
 										</ul>
 									</div>
 								</li>
@@ -105,9 +105,9 @@
 					</nav>
 					<main class="col-lg-10">
 
-						<div class="container-fluid d-flex  mt-5">
+						<div class="container-fluid d-flex justify-content-center mt-5">
 
-							<div id="map" style="width: 600px; height: 400px;" class="mb-3"></div>
+							<div id="map" style="width: 1000px;px; height: 400px;" class="mb-3"></div>
 
 							<!-- Modal de création de commentaires (en dehors de la boucle) -->
 							<div class="modal fade" id="createCommentModal" tabindex="-1" role="dialog" aria-labelledby="createCommentModalLabel" aria-hidden="true">
@@ -134,131 +134,193 @@
 								</div>
 							</div>
 						</div>
-
+						<!-- fin du modal -->
 						<div class="row">
-							<div><input type="text" id="station-search" placeholder="votre station" class="">
-								<button id="search-button" class="btn btn-primary">rechercher</button>
+							<div class="text-center">
+
+								<p><img src="./assets/images/marker-svgrepo-comY.svg" alt="" height="20rem">ligne 1
+									<img src="./assets/images/marker-svgrepo-comR.svg" alt="" height="20rem">ligne 2
+									<img src="./assets/images/warning-svgrepo-com.svg" alt="" height="20rem">
+									perturbation</p>
 							</div>
-							<div class="row">{% for ligne in [1, 2] %}
-<div class="col-lg-6">
+							<div class="text-center"><input type="text" id="station-search" placeholder=" rechercher votre station" class="form-control">
+							</div>
+							<div class="row">
+								{% for ligne in [1, 2] %}
+									<div class="col-lg-6">
 
-	<div class="card mt-5 text-center">
-		<div class="card-header bg-{{ ligne == 1 ? 'warning' : 'danger' }}">
-			<h2 class="text-light ">Métro ligne
-				{{ ligne }}</h2>
-		</div>
-
-		{% for station in stations %}
-			{% if station.ligne == ligne %}
-				<div class="card-body">
-
-					<div class="accordion" id="accordionPanelsStayOpenExample">
-						<div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ station.idStation }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ station.idStation }}">
-									<span class=" {{ ligne == 1 ? 'sep-container' : 'sep-container2' }}">
-										<span class="sep"></span>
-										<span class="circle">
-											<span class="circle-inner"></span>
-										</span>
-									</span>
-
-									<span class="nom-station">{{ station.nomStation }}
-										{% set stationImageDisplayed = false %} {# va affichier une fois l'image meme si il y a plusieurs post par station #}
-										{% for post in posts %}
-											{% if post.idStation.nomStation == station.nomStation and not stationImageDisplayed %}
-												<img src="./assets/images/warning-svgrepo-com(2).svg" alt="Logo de la station" class="warning-logo" height="auto" width="20rem">
-												{% set stationImageDisplayed = true %}
-											{% endif %}
-										{% endfor %}
-
-									</span>
-								</button>
-							</h2>
-							<div id="panelsStayOpen-collapse{{ station.idStation }}" class="accordion-collapse collapse ">
-								<div class="accordion-body">
-									{% for post in posts %}
-										{% if post.idStation.nomStation == station.nomStation %}
-											<div class="card mt-3">
-												<div class="card-header bg-light">
-													<h5 class="card-title">Publié par:
-														{{ post.idUtlisateur.prenomUtilisateur }}</h5>
-												</div>
-												<div class="card-body">
-													<strong class="d-flex justify-content-start">Message:</strong>
-													<p class="card-text">
-														{{ post.contenuPost }}</p>
-													<strong class="d-flex justify-content-start">Station:</strong>
-													<p class="card-text metro-station">
-														{{ post.idStation.nomStation }}
-														- Ligne
-														{{ post.idStation.ligne }}</p>
-													<strong class="d-flex justify-content-start">Catégorie:</strong>
-													<p class="card-text">
-														{% if post.idCategorie.libCategorie == 'ascenseur' %}
-															<img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" width="10%">
-														{% elseif post.idCategorie.libCategorie == 'escalator' %}
-															<img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" width="10%">
-														{% elseif post.idCategorie.libCategorie == 'Forte affluence' %}
-															<img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" width="10%">
-														{% elseif post.idCategorie.libCategorie == 'Travaux' %}
-															<img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" width="10%">
-														{% endif %}
-														{{ post.idCategorie.libCategorie }}
-													</p>
-												</div>
-												<ul class="list-group list-group-flush">
-													<li class="list-group-item">
-														<a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
-															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewbox="0 0 16 16">
-																<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-															</svg>
-															{{ post.postConfirmer }}
-														</a>
-														<a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
-															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down-fill" viewbox="0 0 16 16">
-																<path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.378 1.378 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51.136.02.285.037.443.051.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.896 1.896 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2.094 2.094 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.162 3.162 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.823 4.823 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591z"/>
-															</svg>
-															{{ post.postInfirmer }}
-														</a>
-													</li>
-													<li class="list-group-item">
-														<button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
-															Ajouter commentaire
-														</button>
-														<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#commentsCollapse{{ post.idPost }}">
-															Voir commentaires
-														</button>
-													</li>
-													<li class="list-group-item">
-														<div id="commentsCollapse{{ post.idPost }}" class="collapse">
-															<h6>Commentaires :</h6>
-															<ul>
-																{% for comment in commentsByPost[post.idPost] %}
-																	<li>
-																		<strong>Commenté par:
-																			{{ comment.idUtlisateur.prenomUtilisateur }}</strong>
-																		{{ comment.contenuCommentaire }}
-																	</li>
-																{% endfor %}
-															</ul>
-														</div>
-													</li>
-												</ul>
+										<div class="card mt-5 text-center">
+											<div class="card-header bg-{{ ligne == 1 ? 'warning' : 'danger' }}">
+												<h2 class="text-light ">Ligne
+													{{ ligne }}</h2>
 											</div>
-										{% endif %}
-									{% endfor %}
 
-								</div>
+											{% for station in stations %}
+												{% if station.ligne == ligne %}
+													<div class="paddingZero">
+
+														<div class="accordion" id="accordionPanelsStayOpenExample">
+															<div class="accordion-item">
+																<h2 class="accordion-header">
+																	<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ station.idStation }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ station.idStation }}">
+																		<span class=" {{ ligne == 1 ? 'sep-container' : 'sep-container2' }}">
+																			<span class="sep"></span>
+																			<span class="circle">
+																				<span class="circle-inner"></span>
+																			</span>
+																		</span>
+
+																		<span class="nom-station">{{ station.nomStation }}
+																			{% set stationImageDisplayed = false %}
+																			{% set ascenseurDisplayed = false %}
+																			{% set escalatorDisplayed = false %}
+																			{% set forteAffluenceDisplayed = false %}
+																			{% set travauxDisplayed = false %}
+
+																			{% for post in posts %}
+																				{% if post.idStation.nomStation == station.nomStation and post.idStation.ligne == station.ligne %}
+																					{% if not stationImageDisplayed %}
+																						<img src="./assets/images/warning-svgrepo-com.svg" alt="Logo de la station" class="warning-logo" height="auto" width="20rem">
+																						{% set stationImageDisplayed = true %}
+																					{% endif %}
+
+																					{% if post.idCategorie.libCategorie == 'ascenseur' and not ascenseurDisplayed %}
+																						<img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" width="20rem" title="ascenseur en panne">
+																						{% set ascenseurDisplayed = true %}
+																					{% elseif post.idCategorie.libCategorie == 'escalator' and not escalatorDisplayed %}
+																						<img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" width="20rem" title="escalator en panne">
+																						{% set escalatorDisplayed = true %}
+																					{% elseif post.idCategorie.libCategorie == 'Forte affluence' and not forteAffluenceDisplayed %}
+																						<img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" width="20rem" title="forte affluence">
+																						{% set forteAffluenceDisplayed = true %}
+																					{% elseif post.idCategorie.libCategorie == 'Travaux' and not travauxDisplayed %}
+																						<img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" width="20rem" title="travaux">
+																						{% set travauxDisplayed = true %}
+																					{% endif %}
+																				{% endif %}
+																			{% endfor %}
+
+																		</span>
+																	</button>
+																</h2>
+																<div id="panelsStayOpen-collapse{{ station.idStation }}" class="accordion-collapse collapse ">
+																	<div class="accordion-body">
+																		{% for post in posts %}
+																			{% if post.idStation.nomStation == station.nomStation and post.idStation.ligne == station.ligne  %}
+																				<div class="card mt-3">
+																					<div class="card-header bg-light">
+																						<h5 class="card-title">Publié par:
+																							{{ post.idUtlisateur.prenomUtilisateur }}</h5>
+																					</div>
+																					<div class="card-body text-start">
+																						<strong class="d-flex justify-content-start">Message:</strong>
+																						<p class="card-text">
+																							{{ post.contenuPost }}</p>
+																						<strong class="d-flex justify-content-start">Station:</strong>
+																						<p class="card-text metro-station">
+																							{{ post.idStation.nomStation }}
+																							- Ligne
+																							{{ post.idStation.ligne }}</p>
+																						<strong class="d-flex justify-content-start">Catégorie:</strong>
+																						<p class="card-text">
+																							{% if post.idCategorie.libCategorie == 'ascenseur' %}
+																								<img src="./assets/images/elevator-2-svgrepo-com.svg" alt="Ascenseur" height="20rem">
+																							{% elseif post.idCategorie.libCategorie == 'escalator' %}
+																								<img src="./assets/images/escalator-svgrepo-com.svg" alt="Escalator" height="20rem">
+																							{% elseif post.idCategorie.libCategorie == 'Forte affluence' %}
+																								<img src="./assets/images/group-people-profile-user-person-svgrepo-com.svg" alt="Forte Affluence" height="20rem">
+																							{% elseif post.idCategorie.libCategorie == 'Travaux' %}
+																								<img src="./assets/images/construction-svgrepo-com.svg" alt="Travaux" height="20rem">
+																							{% endif %}
+																							{{ post.idCategorie.libCategorie }}
+																						</p>
+																					</div>
+																					<ul class="list-group list-group-flush">
+																						<li class="list-group-item">
+																							<a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
+																								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewbox="0 0 16 16">
+																									<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+																								</svg>
+																								{{ post.postConfirmer }}
+																							</a>
+																							<a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
+																								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewbox="0 0 16 16">
+																									<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+																								</svg>
+																								{{ post.postInfirmer }}
+																							</a>
+																						</li>
+																						<li class="list-group-item">
+																							<button type="button" class="btn btn-primary open-comment-modal w-50" data-toggle="modal" data-target="#createCommentModal" data-post-id="{{ post.idPost }}">
+																								Ajouter commentaire
+																							</button>
+																							<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse{{ post.idPost }}">
+																								Voir commentaires
+																							</button>
+																						</li>
+																						<li class="list-group-item">
+																							<div id="commentsCollapse{{ post.idPost }}" class="collapse text-start">
+																								<h6>Commentaires :</h6>
+
+																								{% for comment in commentsByPost[post.idPost] %}
+																									<div class="card-header bg-light">
+																										<h5 class="card-title">Commenté par:
+																											{{ comment.idUtlisateur.prenomUtilisateur }}</h5>
+																									</div>
+																									<div class="card-body text-start">
+																										<strong class="d-flex justify-content-start">Commentaire :</strong>
+																										<p class="card-text">{{ comment.contenuCommentaire }}</p>
+
+																										<ul class="list-group list-group-flush">
+																											<li class="list-group-item">
+																												<a class="btn btn-success" href="{{ path('comment_confirm', {'id': comment.idCommentaire}) }}">
+																													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewbox="0 0 16 16">
+																														<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06a.733.733 0 0 1 1.047 0l3.052 3.093l5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+																													</svg>
+																													{{ comment.postConfirmer }}
+																												</a>
+																												<a class="btn btn-danger" href="{{ path('comment_infirm', {'id': comment.idCommentaire}) }}">
+																													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewbox="0 0 16 16">
+																														<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+																													</svg>
+																													{{ comment.postInfirmer }}
+																												</a>
+																											</li>
+																										</ul>
+																									</div>
+																								{% endfor %}
+
+																							</div>
+																						</li>
+																					</ul>
+																				</div>
+																			{% endif %}
+																		{% endfor %}
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												{% endif %}
+											{% endfor %}
+
+										</div>
+									</div>
+								{% endfor %}
 							</div>
-						</div>
+						</main>
 					</div>
 				</div>
-			{% endif %}
-		{% endfor %}
 
-	</div>
-</div>{% endfor %}</div></main></div></div>{% endblock %}{% block javascripts %}<script src="{{ asset('./assets/javascript/home.js') }}"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script><script src="https://code.jquery.com/jquery-3.6.4.min.js"></script><script>$(document).ready(function () { // Fonction pour filtrer les stations en fonction de la requête
+			{% endblock %}
+			{% block javascripts %}
+				<script src="{{ asset('./assets/javascript/home.js') }}"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+				<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+				<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+				<script>
+					$(document).ready(function () { // Fonction pour filtrer les stations en fonction de la requête
 function filterStations(query) { // Obtenir tous les éléments de station
 var stations = $('.accordion');
 
@@ -272,7 +334,6 @@ return stationName.toLowerCase().includes(query.toLowerCase());
 stations.hide();
 filteredStations.show();
 
-console.log(filteredStations);
 // Afficher la valeur saisie sur la page
 $('#entered-value').text('Valeur saisie : ' + query);
 }
@@ -283,10 +344,9 @@ var query = $(this).val();
 filterStations(query);
 });
 
-// Écouteur d'événements pour le bouton de recherche
-$('#search-button').on('click', function () {
-var query = $('#station-search').val();
-filterStations(query);
+
 });
-});</script>{% endblock %}{% endblock %}
+				</script>
+			{% endblock %}
+		{% endblock %}
 

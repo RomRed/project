@@ -2,155 +2,173 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau de bord{% endblock %}
+{% block title %}Tableau de bord
+{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+	<div class="container-fluid">
 
-			<div class="row">
-				<nav id="mainNavbar" class="col-lg-2 sidebar" style="background-color: #47657c; color:white;">
+		<div class="row">
+			<nav id="mainNavbar" class="col-lg-2 sidebar" style="background-color: #47657c; color:white;">
 
-					<div
-						class="container-fluid">
+				<div
+					class="container-fluid">
 
-						<!-- Brand -->
-						<a class="navbar-brand" href="./index.html">
-							<img src="./assets/images/logoMobility.png" alt="" srcset="" height="50%" width="50%">
+					<!-- Brand -->
+					<a class="navbar-brand" href="./index.html">
+						<img src="./assets/images/logoMobility.png" alt="" srcset="" height="50%" width="50%">
+					</a>
+
+					<!-- Navbar toggler -->
+					<div>
+						<a href="javascript: void(0);" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon text-light">
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewbox="0 0 16 16">
+									<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+								</svg>
+							</span>
 						</a>
+					</div>
+					<!-- Collapse -->
+					<div
+						class="collapse navbar-collapse" id="sidenavCollapse">
 
-						<!-- Navbar toggler -->
-						<div>
-							<a href="javascript: void(0);" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon text-light">
-									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewbox="0 0 16 16">
-										<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+						<!-- Navigation -->
+						<ul class="navbar-nav mb-lg-7 mt-1">
+							<li class="nav-item dropdown">
+								<a class="nav-link active" href="{{path('publications')}}" role="button">
+									<svg viewbox="0 0 24 24" class="nav-link-icon" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+										<path d="M3.753,13.944v8.25h6v-6a1.5,1.5,0,0,1,1.5-1.5h1.5a1.5,1.5,0,0,1,1.5,1.5v6h6v-8.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+										<path d="M.753,12.444,10.942,2.255a1.5,1.5,0,0,1,2.122,0L23.253,12.444" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
 									</svg>
-								</span>
-							</a>
-						</div>
-						<!-- Collapse -->
-						<div
-							class="collapse navbar-collapse" id="sidenavCollapse">
+									<span>Home</span>
+								</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link text-light" href="{{ path('app_cree_post') }}" role="button">
+									<span>Créer Post</span>
+								</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link " href="#authenticationCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="authenticationCollapse">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="nav-link-icon" height="18" width="18">
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.75 9.75H5.25C4.42157 9.75 3.75 10.4216 3.75 11.25V21.75C3.75 22.5784 4.42157 23.25 5.25 23.25H18.75C19.5784 23.25 20.25 22.5784 20.25 21.75V11.25C20.25 10.4216 19.5784 9.75 18.75 9.75Z"></path>
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 9.75V6C6.75 4.60761 7.30312 3.27226 8.28769 2.28769C9.27226 1.30312 10.6076 0.75 12 0.75C13.3924 0.75 14.7277 1.30312 15.7123 2.28769C16.6969 3.27226 17.25 4.60761 17.25 6V9.75"></path>
+										<path stroke="currentColor" stroke-width="1.5" d="M12 16.5C11.7929 16.5 11.625 16.3321 11.625 16.125C11.625 15.9179 11.7929 15.75 12 15.75"></path>
+										<path stroke="currentColor" stroke-width="1.5" d="M12 16.5C12.2071 16.5 12.375 16.3321 12.375 16.125C12.375 15.9179 12.2071 15.75 12 15.75"></path>
+									</svg>
+									<span>Mon Compte</span>
+								</a>
+								<div class="collapse " id="authenticationCollapse">
+									<ul class="nav flex-column">
+										<li class="nav-item dropdown">
+											<a class="nav-link text-light" href="{{path('app_connexion')}}" role="button">
+												<span>Connexion</span>
+											</a>
+										</li>
+										<li class="nav-item dropdown">
+											<a class="nav-link text-light" href="{{path('dashboard_utilisateur')}}" role="button">
+												<span>Mon espace</span>
+											</a>
+										</li>
+										<li class="nav-item dropdown">
+											<a class="nav-link text-light" href="{{path('app_inscription_utilisateur')}}" role="button">
+												<span>Inscription</span>
+											</a>
+										</li>
+										<li class="nav-item dropdown">
+											<a class="nav-link text-light" href="{{ path('app_connexion') }}" role="button">
+												<span>Déconnexion</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="nav-item w-100">
+								<hr>
+							</li>
+							<li class="nav-item">
+								<a href="./docs/index.html" class="nav-link">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download text-light" viewbox="0 0 16 16">
+										<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+										<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+									</svg>
+									<span>Notre Application</span>
+								</a>
+							</li>
+						</ul>
+						<!-- End of Navigation -->
+					</div>
+				</nav>
+				<main class="col-lg-10">
+					<div class="container">
+						<h1>Bienvenue sur votre espace,
+							{{ app.user.prenomUtilisateur }}
+							!</h1>
+						<h3>Vos points :
+							{{ app.user.compteurpoint }}</h3>
+						<h2>Vos publications :</h2>
+						<ul>
+							{% for message in app.flashes('error') %}
+								<div class="alert alert-danger">
+									{{ message }}
+								</div>
+							{% endfor %}
+							{% block content %}
+								<div class="container">
+									<a class="btn btn-dark mb-2 mt-2" href="{{ path('app_cree_post') }}">Crée un nouveau post !</a>
+									<div class="row">
+										{% for post in posts %}
+											<div class="col-md-4">
+												<div class="card mb-4">
+													<div class="d-flex justify-content-between">
+														<a href="{{ path('modifier_post', {'id': post.idPost}) }}" class="" title="Modifier">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-highlighter" viewbox="0 0 16 16">
+																<path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07.435-.414Zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254-2.905-2.906Zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065 2.85 2.85ZM5.293 13.5 2.5 10.707v1.586L3.707 13.5h1.586Z"/>
+															</svg>
+														</a>
+														<a href="{{ path('supprimer_post', {'id': post.idPost}) }}" class="" title="Supprimer">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel-fill text-danger" viewbox="0 0 16 16">
+																<path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.884 6.68 8 9.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 10l2.233 2.68a.5.5 0 0 1-.768.64L8 10.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 10 5.116 7.32a.5.5 0 1 1 .768-.64z"/>
+															</svg>
+														</a>
+													</div>
+													<div class="card-body">
+														<h5 class="card-title">Publié par :
+															{{ post.idUtlisateur.prenomUtilisateur }}</h5>
+														<h6>Message :</h6>
+														<p class="card-text">{{ post.contenuPost }}</p>
+														<p class="card-text">Station:
+															{{ post.idStation.nomStation }}
+															- Ligne
+															{{ post.idStation.ligne }}</p>
+														<p class="card-text">Catégorie:
+															{{ post.idCategorie.libCategorie }}</p>
 
-							<!-- Navigation -->
-							<ul class="navbar-nav mb-lg-7 mt-1">
-								<li class="nav-item dropdown">
-									<a class="nav-link active" href="{{path('publications')}}" role="button" >
-										<svg viewbox="0 0 24 24" class="nav-link-icon" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
-											<path d="M3.753,13.944v8.25h6v-6a1.5,1.5,0,0,1,1.5-1.5h1.5a1.5,1.5,0,0,1,1.5,1.5v6h6v-8.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-											<path d="M.753,12.444,10.942,2.255a1.5,1.5,0,0,1,2.122,0L23.253,12.444" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-										</svg>
-										<span>Home</span>
-									</a>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link " href="#authenticationCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="authenticationCollapse">
-										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="nav-link-icon" height="18" width="18">
-											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.75 9.75H5.25C4.42157 9.75 3.75 10.4216 3.75 11.25V21.75C3.75 22.5784 4.42157 23.25 5.25 23.25H18.75C19.5784 23.25 20.25 22.5784 20.25 21.75V11.25C20.25 10.4216 19.5784 9.75 18.75 9.75Z"></path>
-											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 9.75V6C6.75 4.60761 7.30312 3.27226 8.28769 2.28769C9.27226 1.30312 10.6076 0.75 12 0.75C13.3924 0.75 14.7277 1.30312 15.7123 2.28769C16.6969 3.27226 17.25 4.60761 17.25 6V9.75"></path>
-											<path stroke="currentColor" stroke-width="1.5" d="M12 16.5C11.7929 16.5 11.625 16.3321 11.625 16.125C11.625 15.9179 11.7929 15.75 12 15.75"></path>
-											<path stroke="currentColor" stroke-width="1.5" d="M12 16.5C12.2071 16.5 12.375 16.3321 12.375 16.125C12.375 15.9179 12.2071 15.75 12 15.75"></path>
-										</svg>
-										<span>Mon Compte</span>
-									</a>
-									<div class="collapse " id="authenticationCollapse">
-										<ul class="nav flex-column">
-											<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{path('app_connexion')}}"  role="button">
-													<span>Connexion</span>
-												</a>
-											</li>
-																						<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{path('dashboard_utilisateur')}}"  role="button">
-													<span>Mon espace</span>
-												</a>
-											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{path('app_inscription_utilisateur')}}" role="button">
-													<span>Inscription</span>
-												</a>
-											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{ path('app_connexion') }}"  role="button">
-													<span>Déconnexion</span>
-												</a>
-											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{ path('app_cree_post') }}"  role="button">
-													<span>Créer Post</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<li class="nav-item w-100">
-									<hr>
-								</li>
-								<li class="nav-item">
-									<a href="./docs/index.html" class="nav-link">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download text-light" viewbox="0 0 16 16">
-											<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-											<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-										</svg>
-										<span>Notre Application</span>
-									</a>
-								</li>
-							</ul>
-							<!-- End of Navigation -->
-						</div>
-					</nav>
-                    <main class="col-lg-10">
-<div class="container">
-    <h1>Bienvenue sur votre espace, {{ app.user.prenomUtilisateur }} !</h1>
-    <h3>Vos points :  {{ app.user.compteurpoint }}</h3>
-    <h2>Vos publications :</h2>
-    <ul>
-{% for message in app.flashes('error') %}
-    <div class="alert alert-danger">
-        {{ message }}
-    </div>
-{% endfor %}
-{% block content %}
-    <div class="container">
+														<a class="btn btn-success" href="{{ path('post_confirm', {'id': post.idPost}) }}">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewbox="0 0 16 16">
+																<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+															</svg>
+															{{ post.postConfirmer }}
+														</a>
+														<a class="btn btn-danger" href="{{ path('post_infirm', {'id': post.idPost}) }}">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewbox="0 0 16 16">
+																<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+															</svg>
+															{{ post.postInfirmer }}
+														</a>
 
-        <div class="row">
-            {% for post in posts %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                     <div class="d-flex justify-content-between"><a href="{{ path('modifier_post', {'id': post.idPost}) }}" class="" title="Modifier"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07.435-.414Zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254-2.905-2.906Zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065 2.85 2.85ZM5.293 13.5 2.5 10.707v1.586L3.707 13.5h1.586Z"/>
-</svg></a>
-        <a href="{{ path('supprimer_post', {'id': post.idPost}) }}" class="" title="Supprimer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-excel-fill text-danger" viewBox="0 0 16 16">
-  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.884 6.68 8 9.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 10l2.233 2.68a.5.5 0 0 1-.768.64L8 10.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 10 5.116 7.32a.5.5 0 1 1 .768-.64z"/>
-</svg></a></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Publié par : {{ post.idUtlisateur.prenomUtilisateur }}</h5>
-                            <h6>Message :</h6>
-                            <p class="card-text">{{ post.contenuPost }}</p>
-                            <p class="card-text">Station: {{ post.idStation.nomStation }} - Ligne {{ post.idStation.ligne }}</p>
-                            <p class="card-text">Catégorie: {{ post.idCategorie.libCategorie }}</p>
-                            <a href="" class="btn btn-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-grin-fill" viewBox="0 0 16 16">
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM6.488 7c-.23-.598-.661-1-1.155-1-.493 0-.924.402-1.155 1A2.794 2.794 0 0 1 4 6c0-1.105.597-2 1.333-2 .737 0 1.334.895 1.334 2 0 .364-.065.706-.179 1Zm5.334 0c-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6c0 .364-.065.706-.178 1ZM2.696 8.756a.48.48 0 0 1 .382-.118C4.348 8.786 6.448 9 8 9c1.553 0 3.653-.214 4.922-.362a.48.48 0 0 1 .383.118.3.3 0 0 1 .096.29c-.09.47-.242.921-.445 1.342-.263.035-.576.075-.929.115A36.798 36.798 0 0 1 8 10.75c-1.475 0-2.934-.123-4.027-.247-.353-.04-.666-.08-.93-.115A5.457 5.457 0 0 1 2.6 9.045a.3.3 0 0 1 .097-.29ZM8 13.5a5.49 5.49 0 0 1-4.256-2.017l.116.014c1.115.126 2.615.253 4.14.253 1.525 0 3.025-.127 4.14-.253l.117-.014A5.49 5.49 0 0 1 8 13.5Z"/>
-                                </svg>
-                                {{ post.postConfirmer }}
-                            </a>
-                            <a href="" class="btn btn-danger">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown-fill" viewBox="0 0 16 16">
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16ZM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-                                </svg>
-                                {{ post.postInfirmer }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-    </ul>
+													</div>
+												</div>
+											</div>
+										{% endfor %}
+									</ul>
 
-    {# <a href="{{ path('app_cree_post') }}" class="btn btn-primary">Créer un nouveau post</a>
-    
-    <a href="{{ path('app_connexion') }}" class="btn btn-danger">Se déconnecter</a> #}
-</div>
-</main>
-{% endblock %}
-{% endblock %}
+									{# <a href="{{ path('app_cree_post') }}" class="btn btn-primary">Créer un nouveau post</a>
+																		    
+																		    <a href="{{ path('app_connexion') }}" class="btn btn-danger">Se déconnecter</a> #}
+								</div>
+							</main>
+						{% endblock %}
+					{% endblock %}
+
