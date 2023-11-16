@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VoirPostAdminController!{% endblock %}
+
+{% block body %}
+     <h1 class="text-center"> Liste utilisateur</h1>
+     {% for post in posts %}
+            <div class="card mb-4">                
+                <div class="card-body">
+                    <p class="card-text">{{ post.idPost }}</p>
+                    <p class="card-text">{{ post.contenuPost}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('app_supprimer_post_admin', {'id': post.idPost}) }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        {% endfor %}
+          <a href="{{ path('app_dashboard_admin') }}" class="btn btn-primary">Retour à la liste des utilisateurs</a>
+{% endblock %}

@@ -6,9 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ConnexionUtilisateurController extends AbstractController
+class DashboardController extends AbstractController
 {
-    #[Route('/connexion', name: 'app_connexion')]
+
+
+
+
+
+    #[Route('/dashboard', name: 'dashboard')]
     public function index(): Response
     {
         $user = $this->getUser();
@@ -24,13 +29,4 @@ class ConnexionUtilisateurController extends AbstractController
             throw $this->createAccessDeniedException('Accès refusé.');
         }
     }
-
-    #[Route('/deconnexion', name: 'app_connexion_deconnexion')]
-    public function deconnexion(): Response
-    {
-        return $this->render('connexion_utilisateur/index.html.twig', [
-            'controller_name' => 'ConnexionUtilisateurController',
-        ]);
-    }
-
 }

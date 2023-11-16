@@ -69,11 +69,19 @@
 													<span>Connexion</span>
 												</a>
 											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link text-light" href="{{path('dashboard_utilisateur')}}" role="button">
-													<span>Mon espace</span>
-												</a>
-											</li>
+{% if app.user.roleUtlisateur == 'ROLE_ADMIN' %}
+    <li class="nav-item dropdown">
+        <a class="nav-link text-light" href="{{ path('app_dashboard_admin') }}" role="button">
+            <span>Mon espace</span>
+        </a>
+    </li>
+{% else %}
+    <li class="nav-item dropdown">
+        <a class="nav-link text-light" href="{{ path('dashboard_utilisateur') }}" role="button">
+            <span>Mon espace</span>
+        </a>
+    </li>
+{% endif %}
 											<li class="nav-item dropdown">
 												<a class="nav-link text-light" href="{{path('app_inscription_utilisateur')}}" role="button">
 													<span>Inscription</span>
