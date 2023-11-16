@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
+use App\Entity\Avispost;
+use App\Entity\Commentaire;
+use App\Entity\Aviscommentaire;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,22 +35,44 @@ class VoirPostAdminController extends AbstractController
     ): Response {
         $postId = (int) $id;
     
-        // Supprimer tous les avis liés à ce post
-        $sqlDeleteAvis = "DELETE FROM avispost WHERE id_post = :postId";
-        $em->getConnection()->executeStatement($sqlDeleteAvis, ['postId' => $postId]);
-    
-        // Supprimer tous les commentaires liés à ce post
-        $sqlDeleteComments = "DELETE FROM commentaire WHERE id_post = :postId";
-        $em->getConnection()->executeStatement($sqlDeleteComments, ['postId' => $postId]);
-    
-        // Supprimer le post
-        $sqlDeletePost = "DELETE FROM post WHERE id_post = :postId";
-        $em->getConnection()->executeStatement($sqlDeletePost, ['postId' => $postId]);
-    
-        $this->addFlash('success', 'Le post et tous ses commentaires ont été supprimés avec succès.');
-    
-        // Redirection vers la page précédente
-        return $this->redirect($request->headers->get('referer'));
+    // Récupérez les avis posts liés à ce post
+    $avisPosts = $em->getRepository(Avispost::class)->findBy(['idPost' => $postId]);
+
+    // Supprimez tous les avis posts liés à ce post
+    foreach ($avisPosts as $avisPost) {
+        $em->remove($avisPost);
     }
+
+    $em->flush(); // Suppression des avis posts liés
+
+    // Récupérez les commentaires liés à ce post
+    $comments = $em->getRepository(Commentaire::class)->findBy(['idPost' => $postId]);
+
+    foreach ($comments as $comment) {
+        // Récupérez les avis commentaires liés à ce commentaire
+        $avisComments = $em->getRepository(Aviscommentaire::class)->findBy(['idCommentaire' => $comment->getIdCommentaire()]);
+
+        // Supprimez tous les avis commentaires liés à ce commentaire
+        foreach ($avisComments as $avisComment) {
+            $em->remove($avisComment);
+        }
+
+        $em->flush(); // Suppression des avis commentaires liés
+
+        // Supprimez le commentaire
+        $em->remove($comment);
+    }
+
+    // Supprimer le post
+    $post = $em->getRepository(Post::class)->find($postId);
+    $em->remove($post);
+
+    $em->flush(); // Suppression du post
+
+    $this->addFlash('success', 'Le post et tous ses commentaires ont été supprimés avec succès.');
+
+    // Redirection vers la page précédente
+    return $this->redirect($request->headers->get('referer'));
+}
 }
   
